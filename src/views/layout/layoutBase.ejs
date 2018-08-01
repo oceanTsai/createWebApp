@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%= title %></title>
+  <%- include('../shared/'+meta, {data: buildCssPath}) %>
+</head>
+<body>
+  <%- include('../shared/'+header) -%>
+  
+  <%- include('../'+page) -%>
+  
+  <%- include('../shared/'+footer) -%>
+
+  <script src="<%= vendorJSPath %>"></script>
+  <script src="<%= buildJSPath %>"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "SRC": {
+    "VIEWS": "./src/views",
+    "VIEWS_LAYOUT": "./src/views/layout",
+    "VIEWS_SHARED": "./src/views/shared",
+    "VIEWS_REACT": "./src/views/react",
+    "SCSS": "./src/scss",
+    "SCSS_COMMON": "./src/scss/common",
+    "JS_ENTRY": "./src/entry",
+    "JS": "./src/js",
+    "IMG": "./src/img",
+    "SVG": "./src/svg"
+  },
+  "DEST":{
+    "HTML": "./dest/html",
+		"CSS": "./dest/css",
+    "JS": "./dest/js",
+    "IMG": "./dest/img",
+    "SVG": "./dest/svg",
+    "MAP": "../js"
+  },
+  "ROOT": {
+    "DEST": "./dest",
+    "SRC": "./src"
+  },
+  "RES": {
+    "JS": "../js",
+    "CSS": "../css"
+  }
+}
