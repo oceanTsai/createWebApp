@@ -1,5 +1,5 @@
 {
-  "name": "createwebapp",
+  "name": "create-lightweight-webapp",
   "version": "1.0.0",
   "description": "create web app",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/oceanTsai/createWebApp.git"
   },
-  "author": "Ocean TSAI",
+  "author": "ocean",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/oceanTsai/createWebApp/issues"
