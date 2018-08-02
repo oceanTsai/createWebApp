@@ -6,5 +6,6 @@ module.exports = {
   imageTask: require('./scripts/imageTask.js'),
   htmlTask: require('./scripts/htmlTask.js'),
   hotReloadTask: require('./scripts/hotReloadTask.js'),
-  commandTask: require('./scripts/commandTask.js')
+  commandTask: require('./scripts/commandTask.js'),
+  createApp: require('./scripts/createAppTask.js')
 };
