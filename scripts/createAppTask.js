@@ -1,15 +1,18 @@
 const gulp = require('gulp');
-const gulpPlumber = require('gulp-plumber');    //例外處理 避免watch 發生例外直接停止
-//const rename = require("gulp-rename");          //
+const gulpPlumber = require('gulp-plumber');
+const path = require("path");
 
 module.exports = () => {
-  gulp.task('create:f2eApp', () => {
-    gulp.src([
-      './config/**/*', 
-      './src/**/*',
-      './.babelrc'
-    ], {base: '.'})
+  const clonePath = path.resolve(__dirname,'../'); //
+  gulp.task('create:f2eApp', ()=>{
+    gulp.src(
+      [
+        `${clonePath}/config/**/*`, 
+        `${clonePath}/src/**/*`,
+        `${clonePath}/.babelrc`
+      ],
+      {base: clonePath})
         .pipe(gulpPlumber())
-        .pipe(gulp.dest('./f2eApp'))
+        .pipe(gulp.dest(`${process.cwd()}`))
   });
 };
