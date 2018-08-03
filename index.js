@@ -36,7 +36,5 @@ module.exports = () => {
     //command task
     require('./scripts/commandTask.js')();
   }catch(e){
-    console.log(e)
-    console.log("you can enter gulp create:f2eApp")
   }
 };
