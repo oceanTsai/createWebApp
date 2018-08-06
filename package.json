@@ -1,6 +1,6 @@
 {
   "name": "create-lightweight-webapp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "create web app",
   "main": "index.js",
   "scripts": {

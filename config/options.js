@@ -33,7 +33,7 @@ module.exports = {
   },
   vendorOptions: {
     distName: vendorJsName,
-    vendors: ['react', 'react-dom', 'axios'],
+    vendors: [], //'react', 'react-dom', 'axios'
     destPath: PATH.DEST.JS,
     uglifyOptions: {
       compress: {
