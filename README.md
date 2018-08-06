@@ -13,6 +13,11 @@ Then, add it to your `gulpfile.js`:
 require('create-lightweight-webapp')();
 ```
 
+If you don't have a gulpfile.js and your os is mac
+```shell
+echo "require('create-lightweight-webapp')();" > gulpfile.js
+```
+
 then, in your terminal enter 
 ```shell
 gulp create:f2eApp
@@ -126,4 +131,38 @@ other
   package-lock.json
   package.json
   README.md
+```
+
+
+## use vendor
+```text
+edit /config/options.js
+```
+
+```text
+vendorOptions: {
+    distName: vendorJsName,
+    `vendors: ['react', 'react-dom', 'axios'],`   // enter your vendor library
+    destPath: PATH.DEST.JS,
+    uglifyOptions: {
+      compress: {
+        drop_console: true
+      }
+    }
+},
+```
+
+note: Remember install your vendor library
+
+ex: 
+```shell
+npm i react --save
+```
+
+```shell
+npm i react-dom --save
+```
+
+```shell
+npm i axios --save
 ```
