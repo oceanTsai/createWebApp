@@ -4,8 +4,8 @@ const glob = require('glob');                     //
 const browserify = require('browserify');         //package js
 const source = require('vinyl-source-stream');    //
 const buffer = require('vinyl-buffer');           //
-const gulpUglify = require('gulp-uglify');        //醜化
-const es3ify = require("gulp-es3ify");            //為了ie8 無法使用 export default
+const gulpUglify = require('gulp-uglify');        //
+const es3ify = require("gulp-es3ify");            //ie8 keyword.
 const sourcemaps = require('gulp-sourcemaps'); 	  //create js source map
 const watchify = require('watchify');						  //browserify package speed
 const { pass, reload } = require('./commonJoinPoint.js');
@@ -31,10 +31,10 @@ module.exports = (options) => {
         })
         .pipe(source(path.basename(file)))
         .pipe(buffer())
-        .pipe(uglify())               //醜化
-        .pipe(sourceMapInit())        //js source map
+        .pipe(uglify())
+        .pipe(sourceMapInit())
         .pipe(sourceMapWrite())
-        .pipe(es3ify())               //for ie8
+        .pipe(es3ify())
         .pipe(gulp.dest(destPath))
         .pipe(reload())
     };
@@ -42,7 +42,7 @@ module.exports = (options) => {
     return (isWatchify) => {
       glob(srcPath, {}, function (err, files) {
         files.forEach(function (file) {
-          //TODO watchify 有 bug 會多次整理
+          //TODO watchify
           const browserifyOption = { entries: [file] };
           //const browserifyOption = isWatchify ? { entries: [file], plugin: [watchify] } : { entries: [file] } ;
           let browserifyInstance =
