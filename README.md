@@ -115,7 +115,7 @@ other
       guideline.scss            // example, web page main scss.
       home.scss                 // example, web page main scss.
     -- views
-      --- layout
+      --- layout
         layoutBase.ejs          // page template.
       --- react                 
         --- components          // react component.
