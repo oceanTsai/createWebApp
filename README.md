@@ -1,6 +1,10 @@
 # 🐔 createWebApp
  createWebApp generator that scaffolds out a front-end web app using gulp for the build process
 
+## 🐔 Environment
+node 8.10
+npm 5.6.0
+
 ## 🐔 Installation
 ```shell
 npm i create-lightweight-webapp --save-dev

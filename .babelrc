@@ -20,6 +20,6 @@
         "moduleName": "babel-runtime"
       }
     ],
-    "transform-decorators"
+    "transform-decorators-legacy"
   ]
 }
