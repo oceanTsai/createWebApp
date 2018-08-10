@@ -15,7 +15,8 @@ module.exports = () => {
       imgOptions,
       svgOptions,
       vendorOptions,
-      jsOptions
+      jsOptions,
+      vendorCssOptions
     } = require(optionsFile);  
     //
     const layoutOptions = require(layoutFile);
@@ -25,6 +26,8 @@ module.exports = () => {
     require('./scripts/jsTask.js')({ jsOptions, vendorOptions });
     //vendor js task
     require('./scripts/vendorJsTask.js')(vendorOptions);
+    //css vendor
+    require('./scripts/vendorCssTask.js')(vendorCssOptions);
     //scss task
     require('./scripts/cssTask.js')(scssOptions);
     //image task

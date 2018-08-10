@@ -6,6 +6,7 @@
     "VIEWS_REACT": "./src/views/react",
     "SCSS": "./src/scss",
     "SCSS_COMMON": "./src/scss/common",
+    "MANUAL_CSS": "./src/manual3rdCss",
     "JS_ENTRY": "./src/entry",
     "JS": "./src/js",
     "IMG": "./src/img",

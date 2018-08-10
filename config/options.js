@@ -1,5 +1,6 @@
 const PATH = require('./PATH.json');
 const vendorJsName = 'vendor.js';
+const vendorCssName = 'vendor.css';
 module.exports = {
   cleanOptions: {
     jsOptions: {
@@ -31,6 +32,7 @@ module.exports = {
       }
     }
   },
+  //javascript vendor
   vendorOptions: {
     distName: vendorJsName,
     vendors: [], //'react', 'react-dom', 'axios'
@@ -39,6 +41,22 @@ module.exports = {
       compress: {
         drop_console: true
       }
+    }
+  },
+  //css vendor
+  vendorCssOptions: {
+    distName: vendorCssName,
+    vendors:[], //your node_modules 3rd css name. 
+    manualVendors: [`${PATH.SRC.MANUAL_CSS}/**/*.css`, `${PATH.SRC.MANUAL_CSS}/**/*.min.css`], //your manaul 3rd css path.
+    destPath: PATH.DEST.CSS,
+    cleanCssOptions: {
+      compatibility: 'ie7',
+      //keepBreaks: true,
+      keepSpecialComments: '*'
+    },
+    autoprefixerOption: {
+      browsers: ["last 4 versions", "ie >= 7"],
+      cascade: false
     }
   },
   scssOptions: {
