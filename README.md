@@ -113,6 +113,8 @@ other
       react.png                 // example.
     -- js
       util.js                   // common js example.
+    -- manual3rdCss             // manual 3rd css , css library can placed here.
+      helloWord.css             // script test file.
     -- scss                     // web page main css file.
       --- common                //
         guideline.css           // example, common scss.
@@ -138,7 +140,7 @@ other
 ```
 
 
-## 🐔 use vendor
+## 🐔 use vendor js
 ```text
 edit /config/options.js
 ```
@@ -169,6 +171,42 @@ npm i react-dom --save
 
 ```shell
 npm i axios --save
+```
+
+## 🐔 use vendor css
+two source
+
+1. from npm node_modules
+2. from `./src/manual3rdCss`
+
+for mode one
+- you can edit vendors of `./config/options.js`.
+
+ex:
+``` js
+vendorCssOptions: {
+    distName: vendorCssName, //your create vendor name
+    vendors:[], //your node_modules 3rd css name. 
+    manualVendors: [`${PATH.SRC.MANUAL_CSS}/**/*.css`, `${PATH.SRC.MANUAL_CSS}/**/*.min.css`], //your manaul 3rd css path.
+    destPath: PATH.DEST.CSS,
+    cleanCssOptions: {
+      compatibility: 'ie7',
+      //keepBreaks: true,
+      keepSpecialComments: '*'
+    },
+    autoprefixerOption: {
+      browsers: ["last 4 versions", "ie >= 7"],
+      cascade: false
+    }
+  },
+``` 
+
+for mode two
+- your can add 3rd css file to `./src/manual3rdCss`
+
+finally you can run `gulp build:css-vendor`  build vendor.css
+```shell
+gulp build:css-vendor
 ```
 
 ## 🐔 use layout
