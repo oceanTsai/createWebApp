@@ -84,6 +84,7 @@ other
 - `gulp start:dev`
 - `gulp build:dev`
 - `gulp build:prod`
+- `gulp stop`
 
 
 ## 🐔 createWebApp Architecture
