@@ -92,6 +92,12 @@ module.exports = {
     root: `${PATH.ROOT.DEST}`,
     livereload: true,
   },
+  // proxyOptions: {
+  //   "/logout": {
+  //     target: "http://0.0.0.0:9528",
+  //     changeOrigin:true
+  //   }
+  // },
   hotReloadOptions: {
     jsWatch: [`${PATH.SRC.JS_ENTRY}/**/*.js`, `${PATH.SRC.JS}/**/*.js`, `${PATH.SRC.VIEWS_REACT}/**/*.jsx`],
     scssWatch: [`${PATH.SRC.SCSS}/**/*.scss`, `${PATH.SRC.SCSS}/common/**/*.scss`],

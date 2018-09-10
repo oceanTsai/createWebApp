@@ -1,11 +1,21 @@
 const gulp = require('gulp');
-const { httpServer, connect } = require('./commonJoinPoint.js');
+const { httpServer, connect, proxy } = require('./commonJoinPoint.js');
 
 module.exports = (options) => {
-  const { serverOptions, hotReloadOptions: { jsWatch, scssWatch, htmlWatch } } = options;
+  const { serverOptions, proxyOptions={}, hotReloadOptions: { jsWatch, scssWatch, htmlWatch } } = options;
 
   gulp.task('connect', () => {
-    httpServer(serverOptions);
+    
+    const proxyConfig = proxyOptions 
+      ? Object.keys(proxyOptions).map((proxyKey)=>(
+          proxy([proxyKey], proxyOptions[proxyKey])
+        ))
+      : []
+    const httpServerConfig = {
+      ...serverOptions,
+      middleware: (connect, opt) => (proxyConfig)
+    };
+    httpServer(httpServerConfig);
   });
 
   gulp.task('stop', () => {

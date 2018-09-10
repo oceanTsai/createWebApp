@@ -16,7 +16,8 @@ module.exports = () => {
       svgOptions,
       vendorOptions,
       jsOptions,
-      vendorCssOptions
+      vendorCssOptions,
+      proxyOptions
     } = require(optionsFile);  
     //
     const layoutOptions = require(layoutFile);
@@ -35,7 +36,7 @@ module.exports = () => {
     //html task
     require('./scripts/htmlTask.js')({ htmlOptions, layoutOptions }, PATH);
     //hot reload task
-    require('./scripts/hotReloadTask.js')({ serverOptions, hotReloadOptions });
+    require('./scripts/hotReloadTask.js')({ serverOptions, hotReloadOptions, proxyOptions });
     //command task
     require('./scripts/commandTask.js')();
   }catch(e){
