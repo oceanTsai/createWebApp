@@ -7,6 +7,7 @@ const { pass, reload } = require('./commonJoinPoint.js');    //
 
 module.exports = (options) => {
   const { autoprefixerOption, cleanCssOptions } = options;
+  console.log(options)
   const autoprefixer = () => (gulpAutoprefixer({ ...autoprefixerOption }));
   const cleanCss = () => (gulpCleanCSS({ ...cleanCssOptions }));
 
@@ -39,14 +40,15 @@ module.exports = (options) => {
   };
 
   gulp.task('build:scss-dev', () => {
-    commonBuildProd(buildDevScss);
+    
+    commonBuildDev(buildDevScss)(options);
   });
 
   gulp.task('build:scss-prod', () => {
-    commonBuildDev(buildProdScss);
+    commonBuildProd(buildProdScss)(options);
   });
 
   gulp.task('watch:scss', () => {
-    commonBuildProd(buildWatchScss);
+    commonBuildDev(buildWatchScss)(options);
   });
 };
