@@ -23,26 +23,33 @@ module.exports = (options) => {
   const buildDevSvg = buildImgAround(pass);
   const buildProdSvg = buildImgAround(pass);
 
-  const commonBuild = (build) => {
+  const commonBuildProd = (build) => {
     return (options) => {
       const { srcPath, destPath } = options;
-      build(srcPath, destPath);
+      build(srcPath, destPath.prod);
+    }
+  };
+
+  const commonBuildDev = (build) => {
+    return (options) => {
+      const { srcPath, destPath } = options;
+      build(srcPath, destPath.dev);
     }
   };
 
   gulp.task('build-img:dev', () => {
-    commonBuild(buildDevImg)(imgOptions);
+    commonBuildDev(buildDevImg)(imgOptions);
   });
 
   gulp.task('build-img:prod', () => {
-    commonBuild(buildProdImg)(imgOptions);
+    commonBuildProd(buildProdImg)(imgOptions);
   });
 
   gulp.task('build-svg:dev', () => {
-    commonBuild(buildDevSvg)(svgOptions);
+    commonBuildDev(buildDevSvg)(svgOptions);
   });
 
   gulp.task('build-svg:prod', () => {
-    commonBuild(buildProdSvg)(svgOptions);
+    commonBuildProd(buildProdSvg)(svgOptions);
   });
 };

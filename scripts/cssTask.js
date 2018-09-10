@@ -24,20 +24,29 @@ module.exports = (options) => {
   const buildProdScss = buildScss({ autoprefixer, cleanCss });
   const buildWatchScss = buildScss({ reload });
 
-  const commonBuild = (build) => ((options) => {
-    const { srcPath, destPath } = options;
-    build(srcPath, destPath);
-  });
+  const commonBuildProd = (build) => {
+    return (options) => {
+      const { srcPath, destPath } = options;
+      build(srcPath, destPath.prod);
+    }
+  };
+
+  const commonBuildDev = (build) => {
+    return (options) => {
+      const { srcPath, destPath } = options;
+      build(srcPath, destPath.dev);
+    }
+  };
 
   gulp.task('build:scss-dev', () => {
-    commonBuild(buildDevScss)(options);
+    commonBuildProd(buildDevScss);
   });
 
   gulp.task('build:scss-prod', () => {
-    commonBuild(buildProdScss)(options);
+    commonBuildDev(buildProdScss);
   });
 
   gulp.task('watch:scss', () => {
-    commonBuild(buildWatchScss)(options);
+    commonBuildProd(buildWatchScss);
   });
 };

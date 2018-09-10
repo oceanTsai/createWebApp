@@ -325,10 +325,15 @@ open config/option.js
 
 add
 ```javascript
-proxyOptions: {
-    "/logout": {    //your mappin  url
-      target: "http://0.0.0.0:9528",  //your server
-      changeOrigin:true
+  "/api/**": {
+    target: "http://0.0.0.0:9528",
+    changeOrigin: true,
+    pathRewrite: {
+      '^/api/': ''
     }
-  }
+  },
+  "/*.html": {
+    target: "http://0.0.0.0:9527/html",
+    changeOrigin: true
+  },
 ```

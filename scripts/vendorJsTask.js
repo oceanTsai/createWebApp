@@ -7,12 +7,12 @@ const gulpes3ify = require("gulp-es3ify");          //為了ie8 無法使用 exp
 const { pass } = require('./commonJoinPoint.js');   //
 
 module.exports = (options) => {
-  const { uglifyOptions, vendors, destPath, distName } = options;
-  
+  const { uglifyOptions, vendors, distName } = options;
+
   const uglify = () => (gulpUglify(uglifyOptions));
 
   const buildJsAround = (uglify, es3ify) => {
-    return () => {
+    return (destPath) => {
       browserify({ debug: true, require: vendors })
         .transform('babelify')
         .bundle()
@@ -27,12 +27,24 @@ module.exports = (options) => {
   const buildVendorJs = buildJsAround(uglify, pass);
   const buildVendorJsIe8 = buildJsAround(uglify, gulpes3ify);
 
-  gulp.task('build:js-vendor', () => {
-    buildVendorJs();
+  gulp.task('build:js-vendor-dev', () => {
+    const { destPath } = options;
+    buildVendorJs(destPath.dev);
   });
 
-  gulp.task('build:js-vendor-ie8', () => {
-    buildVendorJsIe8();
+  gulp.task('build:js-vendor-prod', () => {
+    const { destPath } = options;
+    buildVendorJs(destPath.prod);
+  });
+
+  gulp.task('build:js-vendor-ie8-dev', () => {
+    const { destPath } = options;
+    buildVendorJsIe8(destPath.dev);
+  });
+
+  gulp.task('build:js-vendor-ie8-prod', () => {
+    const { destPath } = options;
+    buildVendorJsIe8(destPath.prod);
   });
 
 };

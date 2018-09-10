@@ -21,9 +21,16 @@ module.exports = (options) => {
 
   const builVendorCss = buildCss({ cleanCss });
 
-  gulp.task('build:css-vendor', () => {
+  gulp.task('build:css-vendor-dev', () => {
     const { vendors, manualVendors, destPath } = options;
     const srcList = [...vendors.map(moduleName => (require.resolve(moduleName))), ...manualVendors];
-    builVendorCss(srcList, destPath);
+    builVendorCss(srcList, destPath.dev);
   });
+
+  gulp.task('build:css-vendor-prod', () => {
+    const { vendors, manualVendors, destPath } = options;
+    const srcList = [...vendors.map(moduleName => (require.resolve(moduleName))), ...manualVendors];
+    builVendorCss(srcList, destPath.prod);
+  });
+
 };
