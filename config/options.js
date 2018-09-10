@@ -94,10 +94,17 @@ module.exports = {
     livereload: true,
   },
   // proxyOptions: {
-  //   "/logout": {
+  //   "/api/**": {
   //     target: "http://0.0.0.0:9528",
-  //     changeOrigin:true
-  //   }
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '^/api/': ''
+  //     }     // rewrite path 
+  //   },
+  //   "/*.html": {
+  //     target: "http://0.0.0.0:9527/html",
+  //     changeOrigin: true
+  //   },
   // },
   hotReloadOptions: {
     jsWatch: [`${PATH.SRC.JS_ENTRY}/**/*.js`, `${PATH.SRC.JS}/**/*.js`, `${PATH.SRC.VIEWS_REACT}/**/*.jsx`],
