@@ -13,8 +13,7 @@ const WATCHIFY = { 'ENABLE': true, 'DISABLE': false };
 
 module.exports = (options) => {
   const {
-    jsOptions: { uglifyOptions, mapPath, srcPath, destPath },
-    vendorOptions: { vendors }
+    jsOptions: { uglifyOptions, mapPath, srcPath, destPath, vendors }
   } = options;
 
   const uglify = () => (gulpUglify(uglifyOptions));

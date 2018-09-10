@@ -18,7 +18,7 @@ const layoutOptions = require('./config/layout.js');
 //clear
 require('./scripts/cleanTask.js')(cleanOptions);
 //javascript task
-require('./scripts/jsTask.js')({ jsOptions, vendorOptions });
+require('./scripts/jsTask.js')({ jsOptions });
 //vendor js task
 require('./scripts/vendorJsTask.js')(vendorOptions);
 //css vendor

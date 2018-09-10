@@ -4,7 +4,7 @@ const layoutFile = `${process.cwd()}/config/layout.js`;
 require('./scripts/createAppTask.js')();
 
 module.exports = () => {
-  try{
+  try {
     const PATH = require(pathFile);
     const {
       cleanOptions,
@@ -18,13 +18,13 @@ module.exports = () => {
       jsOptions,
       vendorCssOptions,
       proxyOptions
-    } = require(optionsFile);  
+    } = require(optionsFile);
     //
     const layoutOptions = require(layoutFile);
     //console.log(cleanOptions)
     require('./scripts/cleanTask.js')(cleanOptions);
     //javascript task
-    require('./scripts/jsTask.js')({ jsOptions, vendorOptions });
+    require('./scripts/jsTask.js')({ jsOptions });
     //vendor js task
     require('./scripts/vendorJsTask.js')(vendorOptions);
     //css vendor
@@ -39,6 +39,6 @@ module.exports = () => {
     require('./scripts/hotReloadTask.js')({ serverOptions, hotReloadOptions, proxyOptions });
     //command task
     require('./scripts/commandTask.js')();
-  }catch(e){
+  } catch (e) {
   }
 };
