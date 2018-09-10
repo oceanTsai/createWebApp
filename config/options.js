@@ -26,6 +26,7 @@ module.exports = {
     srcPath: `${PATH.SRC.JS_ENTRY}/**/*.js`,
     destPath: PATH.DEST.JS,
     mapPath: PATH.DEST.MAP,
+    vendors: [],
     uglifyOptions: {
       compress: {
         drop_console: true
