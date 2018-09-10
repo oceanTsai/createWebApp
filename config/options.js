@@ -1,55 +1,82 @@
 const PATH = require('./PATH.json');
 const vendorJsName = 'vendor.js';
 const vendorCssName = 'vendor.css';
+const uglifyOptions = {
+  compress: {
+    drop_console: true
+  }
+};
 module.exports = {
   cleanOptions: {
     jsOptions: {
-      delPath: [`${PATH.DEST.JS}/*.{js,map}`, `!${PATH.DEST.JS}/${vendorJsName}`]
+      delPath: {
+        dev: [`${PATH.DEST.DEV.JS}/*.{js,map}`, `!${PATH.DEST.DEV.JS}/${vendorJsName}`],
+        prod: [`${PATH.DEST.PROD.JS}/*.{js,map}`, `!${PATH.DEST.PROD.JS}/${vendorJsName}`]
+      }
     },
     vendorJsOptions: {
-      delPath: `${PATH.DEST.JS}/${vendorJsName}`
+      delPath: {
+        dev: `${PATH.DEST.DEV.JS}/${vendorJsName}`,
+        prod: `${PATH.DEST.PROD.JS}/${vendorJsName}`
+      }
     },
     cssOptions: {
-      delPath: PATH.DEST.CSS
+      delPath: {
+        dev: PATH.DEST.DEV.CSS,
+        prod: PATH.DEST.PROD.CSS
+      }
     },
     imageOptions: {
-      delPath: PATH.DEST.IMG
+      delPath: {
+        dev: PATH.DEST.DEV.IMG,
+        prod: PATH.DEST.PROD.IMG
+      }
     },
     htmlOptions: {
-      delPath: PATH.DEST.HTML
+      delPath: {
+        dev: PATH.DEST.DEV.HTML,
+        prod: PATH.DEST.PROD.HTML
+      }
     },
     allOptions: {
-      delPath: PATH.ROOT.DEST
+      delPath: {
+        dev: PATH.ROOT.DEST.DEV,
+        prod: PATH.ROOT.DEST.PROD
+      }
     }
   },
   jsOptions: {
     srcPath: `${PATH.SRC.JS_ENTRY}/**/*.js`,
-    destPath: PATH.DEST.JS,
-    mapPath: PATH.DEST.MAP,
+    destPath: {
+      dev: PATH.DEST.DEV.JS,
+      prod: PATH.DEST.PROD.JS
+    },
+    mapPath: {
+      dev: PATH.DEST.DEV.MAP,
+      prod: PATH.DEST.PROD.MAP,
+    },
     vendors: [],
-    uglifyOptions: {
-      compress: {
-        drop_console: true
-      }
-    }
+    uglifyOptions: uglifyOptions
   },
   //javascript vendor
   vendorOptions: {
     distName: vendorJsName,
     vendors: [], //'react', 'react-dom', 'axios'
-    destPath: PATH.DEST.JS,
-    uglifyOptions: {
-      compress: {
-        drop_console: true
-      }
-    }
+    destPath: {
+      dev: PATH.DEST.DEV.JS,
+      prod: PATH.DEST.PROD.JS,
+    },
+    uglifyOptions: uglifyOptions
   },
   //css vendor
   vendorCssOptions: {
     distName: vendorCssName,
-    vendors:[], //your node_modules 3rd css name. 
+    vendors: [], //your node_modules 3rd css name. 
     manualVendors: [`${PATH.SRC.MANUAL_CSS}/**/*.css`, `${PATH.SRC.MANUAL_CSS}/**/*.min.css`], //your manaul 3rd css path.
-    destPath: PATH.DEST.CSS,
+    destPath: {
+      dev: PATH.DEST.DEV.CSS,
+      prod: PATH.DEST.PROD.CSS
+    },
     cleanCssOptions: {
       compatibility: 'ie7',
       //keepBreaks: true,
@@ -62,7 +89,10 @@ module.exports = {
   },
   scssOptions: {
     srcPath: [`${PATH.SRC.SCSS}/**/*.scss`, `!${PATH.SRC.SCSS}/common/**/*.scss`],
-    destPath: PATH.DEST.CSS,
+    destPath: {
+      dev: PATH.DEST.DEV.CSS,
+      prod: PATH.DEST.PROD.CSS
+    },
     cleanCssOptions: {
       compatibility: 'ie7',
       //keepBreaks: true,
@@ -75,7 +105,10 @@ module.exports = {
   },
   imgOptions: {
     srcPath: [`${PATH.SRC.IMG}/**/*.{jpg,png,gif}`],
-    destPath: PATH.DEST.IMG,
+    destPath: {
+      dev: PATH.DEST.DEV.IMG,
+      prod: PATH.DEST.PROD.IMG,
+    },
     imageminOptions: {
       optimizationLevel: 5, //類型：Number 默認：3 取值範圍：0-7（優化等級）
       progressive: true,    //類型：Boolean 默認：false 無損壓縮jpg圖片
@@ -85,12 +118,15 @@ module.exports = {
   },
   svgOptions: {
     srcPath: [`${PATH.SRC.SVG}/**/*.svg`],
-    destPath: PATH.DEST.SVG
+    destPath: {
+      dev: PATH.DEST.DEV.SVG,
+      prod: PATH.DEST.PROD.SVG,
+    }
   },
   serverOptions: {
     host: '0.0.0.0',
     port: 9527,
-    root: `${PATH.ROOT.DEST}`,
+    root: `${PATH.ROOT.DEST.DEV}`,
     livereload: true,
   },
   // proxyOptions: {
@@ -109,11 +145,14 @@ module.exports = {
   hotReloadOptions: {
     jsWatch: [`${PATH.SRC.JS_ENTRY}/**/*.js`, `${PATH.SRC.JS}/**/*.js`, `${PATH.SRC.VIEWS_REACT}/**/*.jsx`],
     scssWatch: [`${PATH.SRC.SCSS}/**/*.scss`, `${PATH.SRC.SCSS}/common/**/*.scss`],
-    htmlWatch: [`${PATH.SRC.VIEWS}/*.ejs`,`${PATH.SRC.VIEWS_LAYOUT}/**/*.ejs`,`${PATH.SRC.VIEWS_SHARED}/**/*.ejs`]
+    htmlWatch: [`${PATH.SRC.VIEWS}/*.ejs`, `${PATH.SRC.VIEWS_LAYOUT}/**/*.ejs`, `${PATH.SRC.VIEWS_SHARED}/**/*.ejs`]
   },
   htmlOptions: {
     srcPath: [`!${PATH.SRC.VIEWS_REACT}/**/*.{ejs,jsx}`, `!${PATH.SRC.VIEWS_SHARED}/**/*.ejs`],
-    destPath: PATH.DEST.HTML,
+    destPath: {
+      dev: PATH.DEST.DEV.HTML,
+      prod: PATH.DEST.PROD.HTML,
+    },
     vendorJsName
   }
 }

@@ -13,15 +13,18 @@ const WATCHIFY = { 'ENABLE': true, 'DISABLE': false };
 
 module.exports = (options) => {
   const {
-    jsOptions: { uglifyOptions, mapPath, srcPath, destPath, vendors }
+    jsOptions: {
+      uglifyOptions,
+      srcPath,
+      vendors
+    }
   } = options;
 
   const uglify = () => (gulpUglify(uglifyOptions));
   const sourceMapInit = () => (sourcemaps.init({ loadMaps: true }));
-  const sourceMapWrite = () => (sourcemaps.write(mapPath))
-
+  
   const buildJsAround = ({ uglify = pass, reload = pass, sourceMapInit = pass, sourceMapWrite = pass, es3ify = pass }) => {
-    const bundle = function (file) {
+    const bundle = function (file, destPath) {
       this.bundle()
         .on('error', function (err) {
           console.log(err.message);
@@ -38,7 +41,7 @@ module.exports = (options) => {
         .pipe(reload())
     };
 
-    return (isWatchify) => {
+    return (destPath, isWatchify) => {
       glob(srcPath, {}, function (err, files) {
         files.forEach(function (file) {
           //TODO watchify
@@ -51,9 +54,9 @@ module.exports = (options) => {
           //開發階段，只打包有異動的部分，以便於增加開發速度
           if (isWatchify) {
             //browserifyInstance.on('update', bundle.bind(browserifyInstance, file))
-            bundle.call(browserifyInstance, file);
+            bundle.call(browserifyInstance, file, destPath);
           } else {
-            bundle.call(browserifyInstance, file);
+            bundle.call(browserifyInstance, file, destPath);
           }
         });
       });
@@ -61,14 +64,20 @@ module.exports = (options) => {
   };
 
   gulp.task('build:js-dev', () => {
-    buildJsAround({ sourceMapInit, sourceMapWrite })(WATCHIFY.DISABLE); //pass, pass, sourceMapInit, sourceMapWrite
+    const { jsOptions: { mapPath, destPath } } = options;
+    const sourceMapWrite = () => (sourcemaps.write(mapPath.dev));
+    buildJsAround({ sourceMapInit, sourceMapWrite })(destPath.dev, mapPath.dev, WATCHIFY.DISABLE);
   });
 
   gulp.task('build:js-prod', () => {
-    buildJsAround({ uglify, sourceMapInit, sourceMapWrite })(WATCHIFY.DISABLE);
+    const { jsOptions: { mapPath, destPath } } = options;
+    const sourceMapWrite = () => (sourcemaps.write(mapPath.prod));
+    buildJsAround({ uglify, sourceMapInit, sourceMapWrite })(destPath.prod, mapPath.prod, WATCHIFY.DISABLE);
   });
 
   gulp.task('watch:js', () => {
-    buildJsAround({ reload })(WATCHIFY.ENABLE);
+    const { jsOptions: { mapPath, destPath } } = options;
+    const sourceMapWrite = () => (sourcemaps.write(mapPath.dev));
+    buildJsAround({ reload })(destPath.dev, mapPath.dev, WATCHIFY.ENABLE);
   });
 };

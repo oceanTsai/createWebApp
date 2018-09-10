@@ -5,9 +5,8 @@ const rename = require("gulp-rename");                     //
 const { pass, reload } = require('./commonJoinPoint.js');  //
 
 module.exports = (options, PATH) => {
-  const buildHtml = ({ reload = pass }) => (() => {
-    const {htmlOptions, layoutOptions} = options;
-    const { srcPath, destPath, vendorJsName } = htmlOptions;
+  const buildHtml = ({ reload = pass }) => ((srcPath, destPath, vendorJsName) => {
+    const { layoutOptions } = options;
     Object.keys(layoutOptions).forEach((pageName) => {
       const layout = layoutOptions[pageName]['layout'] || 'layoutBase';
       const meta = layoutOptions[pageName]['meta'] || '';
@@ -30,7 +29,7 @@ module.exports = (options, PATH) => {
           suffix: "",
           extname: ".html"
         }))
-        .pipe(gulp.dest(destPath || './dest/html'))
+        .pipe(gulp.dest(destPath))
         .pipe(reload());
     });
   });
@@ -38,11 +37,18 @@ module.exports = (options, PATH) => {
   const buildProdHtml = buildHtml({});
   const buildWatchHtml = buildHtml({ reload });
 
-  gulp.task('build:html', () => {
-    buildProdHtml()
+  gulp.task('build:html-dev', () => {
+    const { srcPath, destPath, vendorJsName } = options.htmlOptions;
+    buildProdHtml(srcPath, destPath.dev, vendorJsName)
+  });
+
+  gulp.task('build:html-prod', () => {
+    const { srcPath, destPath, vendorJsName } = options.htmlOptions;
+    buildProdHtml(srcPath, destPath.prod, vendorJsName)
   });
 
   gulp.task('watch:html', () => {
-    buildWatchHtml()
+    const { srcPath, destPath, vendorJsName } = options.htmlOptions;
+    buildWatchHtml(srcPath, destPath.dev, vendorJsName)
   });
 };
