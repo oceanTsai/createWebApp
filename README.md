@@ -64,8 +64,11 @@ vendor js
 
 css
 - `gulp build:scss-dev`  compile SCSS into CSS
-- `gulp build:scss-prod`  compile SCSS into minify CSS
+- `gulp build:scss-prod` compile SCSS into minify CSS
 - `gulp watch:scss` 
+
+vendor css
+- `build:css-vendor'` compile common css
 
 html
 - `gulp build:html`
@@ -317,3 +320,15 @@ you can run `npm run start` test your page.
 
 open your browser at url enter http://0.0.0.0:9527/html/test.html
 
+## 🐔 use proxy
+open config/option.js
+
+add
+```javascript
+proxyOptions: {
+    "/logout": {    //your mappin  url
+      target: "http://0.0.0.0:9528",  //your server
+      changeOrigin:true
+    }
+  }
+```
