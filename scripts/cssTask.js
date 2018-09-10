@@ -7,7 +7,6 @@ const { pass, reload } = require('./commonJoinPoint.js');    //
 
 module.exports = (options) => {
   const { autoprefixerOption, cleanCssOptions } = options;
-  console.log(options)
   const autoprefixer = () => (gulpAutoprefixer({ ...autoprefixerOption }));
   const cleanCss = () => (gulpCleanCSS({ ...cleanCssOptions }));
 
