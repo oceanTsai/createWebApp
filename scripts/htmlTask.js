@@ -21,7 +21,8 @@ module.exports = (options, PATH) => {
       
       gulp.src(srcList)
         .pipe(gulpPlumber())
-        .pipe(ejs({ meta, header, footer, page, title, buildCssPath, buildJSPath, vendor }))
+        .pipe(ejs({ meta, header, footer, page, title, buildCssPath, buildJSPath,
+          vendor: vendor.map(fileName=>(`../js/vendor/${fileName}.js`)) }))
         .pipe(rename({
           dirname: "",
           basename: pageName,
