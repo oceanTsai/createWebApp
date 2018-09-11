@@ -57,10 +57,9 @@ module.exports = {
     vendors: [],
     uglifyOptions: uglifyOptions
   },
-  //javascript vendor
   vendorOptions: [
     {
-      distName: "vendor.js",
+      distName: "vendor",
       vendors: [], //'react', 'react-dom', 'axios'
       destPath: {
         dev: PATH.DEST.DEV.JS_VENDOR,
@@ -69,7 +68,7 @@ module.exports = {
       uglifyOptions: uglifyOptions
     },
     {
-      distName: "vendor2.js",
+      distName: "vendor2",
       vendors: [],
       destPath: {
         dev: PATH.DEST.DEV.JS_VENDOR,
