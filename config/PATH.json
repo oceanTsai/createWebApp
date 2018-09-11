@@ -17,6 +17,7 @@
       "HTML": "./dest/prod/html",
       "CSS": "./dest/prod/css",
       "JS": "./dest/prod/js",
+      "JS_VENDOR": "./dest/prod/js/vendor",
       "IMG": "./dest/prod/img",
       "SVG": "./dest/prod/svg",
       "MAP": "../js"
@@ -25,6 +26,7 @@
       "HTML": "./dest/dev/html",
       "CSS": "./dest/dev/css",
       "JS": "./dest/dev/js",
+      "JS_VENDOR": "./dest/dev/js/vendor",
       "IMG": "./dest/dev/img",
       "SVG": "./dest/dev/svg",
       "MAP": "../js"

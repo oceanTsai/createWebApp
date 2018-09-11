@@ -14,7 +14,10 @@
   
   <%- include('../shared/'+footer) -%>
 
-  <script src="<%= vendorJSPath %>"></script>
+  <% for(var i=0; i < vendor.length; i++) { %>
+    <script src="<%= vendor[i] %>"></script>
+  <% } %>
+
   <script src="<%= buildJSPath %>"></script>
 </body>
 </html>

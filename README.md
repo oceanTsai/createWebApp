@@ -97,17 +97,25 @@ other
     -- options.js
     -- PATH.json
   - dest
-  - scripts                    //gulp task
-    -- cleanTask.js
-    -- commandTask.js
-    -- commonJoinPoint.js
-    -- createAppTask.js
-    -- cssTask.js
-    -- hotReloadTask.js
-    -- htmTask.js
-    -- imageTask.js
-    -- jsTask.js
-    -- vendorJsTask.js
+    - prod
+      .
+      .
+      .
+    - dev
+      .
+      .
+      .
+    - scripts                    //gulp task
+      -- cleanTask.js
+      -- commandTask.js
+      -- commonJoinPoint.js
+      -- createAppTask.js
+      -- cssTask.js
+      -- hotReloadTask.js
+      -- htmTask.js
+      -- imageTask.js
+      -- jsTask.js
+      -- vendorJsTask.js
   - src                         // base architecture
     -- entry
       guideline.js              // example, web page main js file.
@@ -149,17 +157,28 @@ other
 edit /config/options.js
 ```
 
-```text
-vendorOptions: {
-    distName: vendorJsName,
-    `vendors: ['react', 'react-dom', 'axios'],`   // enter your vendor library
-    destPath: PATH.DEST.JS,
-    uglifyOptions: {
-      compress: {
-        drop_console: true
-      }
+```javascript
+//multiple vendor build
+vendorOptions: [
+    {
+      distName: "vendor.js",
+      vendors: [], //'react', 'react-dom', 'axios'
+      destPath: {
+        dev: PATH.DEST.DEV.JS_VENDOR,
+        prod: PATH.DEST.PROD.JS_VENDOR,
+      },
+      uglifyOptions: uglifyOptions
+    },
+    {
+      distName: "vendor2.js",
+      vendors: [],
+      destPath: {
+        dev: PATH.DEST.DEV.JS_VENDOR,
+        prod: PATH.DEST.PROD.JS_VENDOR,
+      },
+      uglifyOptions: uglifyOptions
     }
-},
+  ],
 ```
 
 note: Remember install your vendor library
@@ -226,7 +245,8 @@ module.exports = {
     header: 'headerBase',
     footer: 'footerBase',
     page: 'guideline',
-    title: "風格指南"
+    title: "風格指南",
+    vendor: []          //your page vendor js name
   },
   home: {
     layout: 'layoutBase',
@@ -234,7 +254,8 @@ module.exports = {
     header: 'headerBase',
     footer: 'footerBase',
     page: 'home',
-    title: "首頁"
+    title: "首頁",
+    vendor: []         //your page vendor js name
   },
   //format
   [your page name.] : {
@@ -259,7 +280,8 @@ module.exports = {
     header: 'headerBase',
     footer: 'footerBase',
     page: 'guideline',
-    title: "風格指南"
+    title: "風格指南",
+    vendor: []
   },
   home: {
     layout: 'layoutBase',
@@ -267,7 +289,8 @@ module.exports = {
     header: 'headerBase',
     footer: 'footerBase',
     page: 'home',
-    title: "首頁"
+    title: "首頁",
+    vendor: []
   },
   test: {
     layout: 'layoutBase',
@@ -275,7 +298,8 @@ module.exports = {
     header: 'headerBase',
     footer: 'footerBase',
     page: 'test',
-    title: "test"
+    title: "test",
+    vendor: []
   } 
 }
 ```

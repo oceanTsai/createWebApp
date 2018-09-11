@@ -5,7 +5,7 @@ const rename = require("gulp-rename");                     //
 const { pass, reload } = require('./commonJoinPoint.js');  //
 
 module.exports = (options, PATH) => {
-  const buildHtml = ({ reload = pass }) => ((srcPath, destPath, vendorJsName) => {
+  const buildHtml = ({ reload = pass }) => ((srcPath, destPath) => {
     const { layoutOptions } = options;
     Object.keys(layoutOptions).forEach((pageName) => {
       const layout = layoutOptions[pageName]['layout'] || 'layoutBase';
@@ -14,14 +14,14 @@ module.exports = (options, PATH) => {
       const footer = layoutOptions[pageName]['footer'] || '';
       const page = layoutOptions[pageName]['page'] || '';
       const title = layoutOptions[pageName]['title'] || '';
+      const vendor = layoutOptions[pageName]['vendor'] || [];
       const srcList = [`${PATH.SRC.VIEWS_LAYOUT}/${layout}.ejs`, ...srcPath];
       const buildCssPath = `${PATH.RES.CSS}/${pageName}.css`;
       const buildJSPath = `${PATH.RES.JS}/${pageName}.js`;
-      const vendorJSPath = `${PATH.RES.JS}/${vendorJsName}`;
-
+      
       gulp.src(srcList)
         .pipe(gulpPlumber())
-        .pipe(ejs({ meta, header, footer, page, title, buildCssPath, buildJSPath, vendorJSPath }))
+        .pipe(ejs({ meta, header, footer, page, title, buildCssPath, buildJSPath, vendor }))
         .pipe(rename({
           dirname: "",
           basename: pageName,
@@ -38,17 +38,17 @@ module.exports = (options, PATH) => {
   const buildWatchHtml = buildHtml({ reload });
 
   gulp.task('build:html-dev', () => {
-    const { srcPath, destPath, vendorJsName } = options.htmlOptions;
-    buildProdHtml(srcPath, destPath.dev, vendorJsName)
+    const { srcPath, destPath } = options.htmlOptions;
+    buildProdHtml(srcPath, destPath.dev)
   });
 
   gulp.task('build:html-prod', () => {
-    const { srcPath, destPath, vendorJsName } = options.htmlOptions;
-    buildProdHtml(srcPath, destPath.prod, vendorJsName)
+    const { srcPath, destPath } = options.htmlOptions;
+    buildProdHtml(srcPath, destPath.prod)
   });
 
   gulp.task('watch:html', () => {
-    const { srcPath, destPath, vendorJsName } = options.htmlOptions;
-    buildWatchHtml(srcPath, destPath.dev, vendorJsName)
+    const { srcPath, destPath } = options.htmlOptions;
+    buildWatchHtml(srcPath, destPath.dev)
   });
 };
