@@ -1,5 +1,4 @@
 const PATH = require('./PATH.json');
-const vendorJsName = 'vendor.js';
 const vendorCssName = 'vendor.css';
 const uglifyOptions = {
   compress: {
@@ -10,14 +9,14 @@ module.exports = {
   cleanOptions: {
     jsOptions: {
       delPath: {
-        dev: [`${PATH.DEST.DEV.JS}/*.{js,map}`, `!${PATH.DEST.DEV.JS}/${vendorJsName}`],
-        prod: [`${PATH.DEST.PROD.JS}/*.{js,map}`, `!${PATH.DEST.PROD.JS}/${vendorJsName}`]
+        dev: [`${PATH.DEST.DEV.JS}/*.{js,map}`, `!${PATH.DEST.DEV.JS_VENDOR}`],
+        prod: [`${PATH.DEST.PROD.JS}/*.{js,map}`, `!${PATH.DEST.PROD.JS_VENDOR}`]
       }
     },
     vendorJsOptions: {
       delPath: {
-        dev: `${PATH.DEST.DEV.JS}/${vendorJsName}`,
-        prod: `${PATH.DEST.PROD.JS}/${vendorJsName}`
+        dev: `${PATH.DEST.DEV.JS_VENDOR}/*.js`,
+        prod: `${PATH.DEST.PROD.JS_VENDOR}/*.js`
       }
     },
     cssOptions: {
@@ -59,15 +58,26 @@ module.exports = {
     uglifyOptions: uglifyOptions
   },
   //javascript vendor
-  vendorOptions: {
-    distName: vendorJsName,
-    vendors: [], //'react', 'react-dom', 'axios'
-    destPath: {
-      dev: PATH.DEST.DEV.JS,
-      prod: PATH.DEST.PROD.JS,
+  vendorOptions: [
+    {
+      distName: "vendor.js",
+      vendors: [], //'react', 'react-dom', 'axios'
+      destPath: {
+        dev: PATH.DEST.DEV.JS_VENDOR,
+        prod: PATH.DEST.PROD.JS_VENDOR,
+      },
+      uglifyOptions: uglifyOptions
     },
-    uglifyOptions: uglifyOptions
-  },
+    {
+      distName: "vendor2.js",
+      vendors: [],
+      destPath: {
+        dev: PATH.DEST.DEV.JS_VENDOR,
+        prod: PATH.DEST.PROD.JS_VENDOR,
+      },
+      uglifyOptions: uglifyOptions
+    }
+  ],
   //css vendor
   vendorCssOptions: {
     distName: vendorCssName,
@@ -152,7 +162,6 @@ module.exports = {
     destPath: {
       dev: PATH.DEST.DEV.HTML,
       prod: PATH.DEST.PROD.HTML,
-    },
-    vendorJsName
+    }
   }
 }
