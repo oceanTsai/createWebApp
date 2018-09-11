@@ -14,13 +14,14 @@ module.exports = (options, PATH) => {
       const footer = layoutOptions[pageName]['footer'] || '';
       const page = layoutOptions[pageName]['page'] || '';
       const title = layoutOptions[pageName]['title'] || '';
+      const vendor = layoutOptions[pageName]['vendor'] || [];
       const srcList = [`${PATH.SRC.VIEWS_LAYOUT}/${layout}.ejs`, ...srcPath];
       const buildCssPath = `${PATH.RES.CSS}/${pageName}.css`;
       const buildJSPath = `${PATH.RES.JS}/${pageName}.js`;
-
+      
       gulp.src(srcList)
         .pipe(gulpPlumber())
-        .pipe(ejs({ meta, header, footer, page, title, buildCssPath, buildJSPath }))
+        .pipe(ejs({ meta, header, footer, page, title, buildCssPath, buildJSPath, vendor }))
         .pipe(rename({
           dirname: "",
           basename: pageName,

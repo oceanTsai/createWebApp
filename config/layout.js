@@ -6,7 +6,7 @@ module.exports = {
     footer: 'footerBase',
     page: 'guideline',
     title: "風格指南",
-    vendor: []
+    vendor: ["vendor.js"]
   },
   home: {
     layout: 'layoutBase',
@@ -15,6 +15,6 @@ module.exports = {
     footer: 'footerBase',
     page: 'home',
     title: "首頁",
-    vendor: []
+    vendor: ["vendor2.js"]
   }
 }
