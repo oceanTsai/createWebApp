@@ -9,9 +9,9 @@ const { pass } = require('./commonJoinPoint.js');   //
 module.exports = (options) => {
 
   const buildJsAround = (uglify, es3ify) => {
-    return (vendors, distName, destPath) => {
+    return (vendors, distName, destPath, debug=false) => {
       if (vendors, distName, destPath) {
-        browserify({ debug: true, require: vendors })
+        browserify({ debug, require: vendors })
           .transform('babelify')
           .bundle()
           .pipe(source(distName))
@@ -27,7 +27,7 @@ module.exports = (options) => {
     options && options.forEach(({ uglifyOptions, vendors, distName, destPath }) => {
       const uglify = () => (gulpUglify(uglifyOptions));
       const buildVendorJs = buildJsAround(uglify, pass);
-      buildVendorJs(vendors, distName, destPath.dev);
+      buildVendorJs(vendors, distName, destPath.dev, true);
     });
   });
 
@@ -35,7 +35,7 @@ module.exports = (options) => {
     options && options.forEach(({ uglifyOptions, vendors, distName, destPath }) => {
       const uglify = () => (gulpUglify(uglifyOptions));
       const buildVendorJs = buildJsAround(uglify, pass);
-      buildVendorJs(vendors, distName, destPath.prod);
+      buildVendorJs(vendors, distName, destPath.prod, false);
     });
   });
 
@@ -43,7 +43,7 @@ module.exports = (options) => {
     options && options.forEach(({ uglifyOptions, vendors, distName, destPath }) => {
       const uglify = () => (gulpUglify(uglifyOptions));
       const buildVendorJsIe8 = buildJsAround(uglify, gulpes3ify);
-      buildVendorJsIe8(vendors, distName, destPath.dev);
+      buildVendorJsIe8(vendors, distName, destPath.dev, true);
     });
   });
 
@@ -51,7 +51,7 @@ module.exports = (options) => {
     options && options.forEach(({ uglifyOptions, vendors, distName, destPath }) => {
       const uglify = () => (gulpUglify(uglifyOptions));
       const buildVendorJsIe8 = buildJsAround(uglify, gulpes3ify);
-      buildVendorJsIe8(vendors, distName, destPath.prod);
+      buildVendorJsIe8(vendors, distName, destPath.prod, false);
     });
   });
 };
