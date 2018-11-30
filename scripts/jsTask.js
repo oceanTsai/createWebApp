@@ -66,13 +66,13 @@ module.exports = (options) => {
   gulp.task('build:js-dev', () => {
     const { jsOptions: { mapPath, destPath } } = options;
     const sourceMapWrite = () => (sourcemaps.write(mapPath.dev));
-    buildJsAround({ sourceMapInit, sourceMapWrite })(destPath.dev, mapPath.dev, WATCHIFY.DISABLE);
+    buildJsAround({ pass, pass })(destPath.dev, mapPath.dev, WATCHIFY.DISABLE);
   });
 
   gulp.task('build:js-prod', () => {
     const { jsOptions: { mapPath, destPath } } = options;
     const sourceMapWrite = () => (sourcemaps.write(mapPath.prod));
-    buildJsAround({ uglify, sourceMapInit, sourceMapWrite })(destPath.prod, mapPath.prod, WATCHIFY.DISABLE);
+    buildJsAround({ uglify, pass, pass })(destPath.prod, mapPath.prod, WATCHIFY.DISABLE);
   });
 
   gulp.task('watch:js', () => {
