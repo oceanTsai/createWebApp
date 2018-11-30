@@ -11,6 +11,7 @@ module.exports = (options) => {
   const buildJsAround = (uglify, es3ify) => {
     return (vendors, distName, destPath, debug=false) => {
       if (vendors, distName, destPath) {
+        // debug need create source map
         browserify({ debug, require: vendors })
           .transform('babelify')
           .bundle()
@@ -27,7 +28,7 @@ module.exports = (options) => {
     options && options.forEach(({ uglifyOptions, vendors, distName, destPath }) => {
       const uglify = () => (gulpUglify(uglifyOptions));
       const buildVendorJs = buildJsAround(uglify, pass);
-      buildVendorJs(vendors, distName, destPath.dev, true);
+      buildVendorJs(vendors, distName, destPath.dev, false);
     });
   });
 
@@ -43,7 +44,7 @@ module.exports = (options) => {
     options && options.forEach(({ uglifyOptions, vendors, distName, destPath }) => {
       const uglify = () => (gulpUglify(uglifyOptions));
       const buildVendorJsIe8 = buildJsAround(uglify, gulpes3ify);
-      buildVendorJsIe8(vendors, distName, destPath.dev, true);
+      buildVendorJsIe8(vendors, distName, destPath.dev, false);
     });
   });
 
