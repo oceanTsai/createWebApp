@@ -31,7 +31,7 @@
     "browserify": "^16.3.0",
     "del": "^3.0.0",
     "glob": "^7.1.4",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-clean-css": "^3.9.4",
     "gulp-concat-css": "^3.1.0",
