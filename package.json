@@ -32,7 +32,7 @@
     "del": "^3.0.0",
     "glob": "^7.1.4",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^5.0.0",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^3.9.4",
     "gulp-concat-css": "^3.1.0",
     "gulp-connect": "^5.7.0",
